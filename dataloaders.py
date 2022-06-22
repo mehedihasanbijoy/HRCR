@@ -2,6 +2,7 @@ import torch
 import torchvision
 import cv2
 import pandas as pd
+from tqdm import tqdm
 
 
 class CustomDataset(torch.utils.data.Dataset):
@@ -33,7 +34,7 @@ if __name__ == '__main__':
         dataset=dataset, batch_size=32,
         shuffle=True, drop_last=True, pin_memory=True
     )
-    for imgs, labels in train_loader:
+    for batch_idx, (imgs, labels) in tqdm(enumerate(train_loader)):
         print(imgs.shape)
         print(labels.shape)
         break
