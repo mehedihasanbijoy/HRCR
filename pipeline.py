@@ -7,7 +7,7 @@ import torch
 import torchvision
 
 
-def basic_classification(transform, n_classes, epochs, batch_size, device):
+def classification(model, transform, batch_size, epochs, device):
     df_train = pd.read_csv('./dfs/train.csv')
     df_test = pd.read_csv('./dfs/test.csv')
 
@@ -23,8 +23,7 @@ def basic_classification(transform, n_classes, epochs, batch_size, device):
         shuffle=True, drop_last=False, pin_memory=True
     )
 
-    model = HRCRBasic(classes=n_classes).to(device)  # basic model
-
+    model.to(device)
     optimizer = torch.optim.Adam(model.parameters())
     criterion = torch.nn.CrossEntropyLoss()
 
